@@ -37,8 +37,8 @@ private slots:
     void refreshQModels();
 
 protected:
-    void closeEvent(QCloseEvent *ev) override{ev->ignore();};
-
+    void closeEvent(QCloseEvent *ev) override/*{ev->ignore();}*/;
+    void reject() override;
 
 
 private:

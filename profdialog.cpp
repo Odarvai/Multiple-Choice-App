@@ -272,11 +272,6 @@ void profDialog::on_editButton_clicked()
 
 void profDialog::on_buttonBox_rejected()
 {
-    /*foreach (QSqlQueryModel *qm, this->findChildren<QSqlQueryModel*>())
-    {
-        qm->query().finish();
-    }
-    */
 
 }
 
@@ -335,21 +330,30 @@ void profDialog::refreshQModels()
     adev_fals->setQuery("select *from Adev_sau_Fals");
 }
 
+void profDialog::reject()
+{
+    QMessageBox::StandardButton resBtn = QMessageBox::question(this, QCoreApplication::applicationName() ,tr("Are you sure?\n"), QMessageBox::Cancel | QMessageBox::No | QMessageBox::Yes);
+    if (resBtn == QMessageBox::Yes)
+    {
+        QDialog::reject();
+    }
+}
 
-/*void profDialog::closeEvent(QCloseEvent *event)
+void profDialog::closeEvent(QCloseEvent *event)
 {
     qDebug() << "S-a apelat functia";
     int rows = ui->intrebari_View->model()->rowCount();
     if (rows % 10)
     {
-        QMessageBox::warning(this, "Numar de intrebari insuficient", "Numarul de intrebari trebuie sa fie un multiplu"
+        QMessageBox::warning(this, "Numar de intrebari inadecvat", "Numarul de intrebari trebuie sa fie un multiplu"
         "al lui 10; Exemplu: 20, 30, 40, 60");
         event->ignore();
     }
     else
     {
-        qDebug() << "esti prost rau";
-        event->accept();
+        qDebug() << "E in regula";
+        reject();
+        event->ignore();
     }
 }
-*/
+
